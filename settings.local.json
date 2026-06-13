@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Start-Process \"http://localhost:3000\")",
+      "PowerShell($file = Get-Item \"d:\\\\claude code 制作\\\\linknote\\\\界面美化.txt\"; Write-Output \"Size: $\\($file.Length\\) bytes\"; Write-Output \"Exists: $\\($file.Exists\\)\"; $content = [System.IO.File]::ReadAllText\\($file.FullName\\); Write-Output \"Content: [$content]\")",
+      "PowerShell($conn = Test-NetConnection -ComputerName localhost -Port 3000 -WarningAction SilentlyContinue -InformationLevel Quiet; Write-Output \"Port 3000 accessible: $conn\")",
+      "PowerShell($response = Invoke-WebRequest -Uri \"http://localhost:3000\" -TimeoutSec 5 -UseBasicParsing; $response.Content)",
+      "PowerShell($process = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -First 1; if \\($process\\) { Stop-Process -Id $process -Force -ErrorAction SilentlyContinue; Write-Output \"Killed process $process on port 3000\" } else { Write-Output \"No process on port 3000\" })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3000\" -TimeoutSec 5 -UseBasicParsing; $r2 = Invoke-WebRequest -Uri \"http://localhost:3000/src/main.tsx\" -TimeoutSec 5 -UseBasicParsing; Write-Output \"HTML: OK \\($\\($r.Content.Length\\) bytes\\)\"; Write-Output \"main.tsx: OK \\($\\($r2.Content.Length\\) bytes\\)\"; } catch { Write-Output \"Error: $_\" })",
+      "PowerShell(if \\(Test-Path \"d:\\\\claude code 制作\\\\linknote\\\\dist\"\\) { Write-Output \"dist exists: $\\(\\(Get-ChildItem 'd:\\\\claude code 制作\\\\linknote\\\\dist' -Recurse | Measure-Object\\).Count\\) files\" } else { Write-Output \"dist 不存在\" }; if \\(Test-Path \"d:\\\\claude code 制作\\\\linknote\\\\build\"\\) { Write-Output \"build exists\" } else { Write-Output \"build 不存在\" })"
+    ]
+  }
+}
